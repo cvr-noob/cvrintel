@@ -45,8 +45,14 @@ async function middleware(req, res, next) {
 function searchStudents(data, field, value) {
     const results = [];
     for (const _class in data) {
+        // Find matching students
         const res = data[_class].filter(student => student[field].trim().includes(value.toUpperCase().trim()));
+        
+        // If there are matches, add the class to each student object and add to results
         if (res.length) {
+            res.forEach(student => {
+                student.Class = _class;  // Add class information to the student object
+            });
             results.push(...res);  // Add all matching students to results
         }
     }
