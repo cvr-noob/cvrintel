@@ -2,11 +2,13 @@ import express from 'express';
 import { configDotenv } from 'dotenv';
 import bcrypt from 'bcryptjs';
 import { readFile } from 'fs';
+import cors from 'cors';
 
 configDotenv();
 const port = process.env.PORT || 5000;
 const dataPath = process.env.DATAPATH;
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
